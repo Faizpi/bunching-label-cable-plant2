@@ -121,12 +121,12 @@
 
                         <div id="label_remark" class="form-group">
                             <label for="remark">Remark</label>
-                            <input type="text" name="remark" value="{{ $label->remark }}" class="form-control" id="remark" placeholder="Remark" required>
+                            <input type="text" name="remark" value="{{ $label->remark }}" class="form-control" id="remark" placeholder="Remark">
                         </div>
 
                         <div id="label_bobin_no" class="form-group">
                             <label for="bobin_no">No Bobin</label>
-                            <input type="text" name="bobin_no" value="{{ $label->bobin_no }}" class="form-control" id="bobin_no" placeholder="No Bobin" required>
+                            <input type="text" name="bobin_no" value="{{ $label->bobin_no }}" class="form-control" id="bobin_no" placeholder="No Bobin">
                         </div>
                     </div>
                 </div>
