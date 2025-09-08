@@ -114,7 +114,7 @@
                                         <tbody>
                                             @forelse ($labels as $index => $label)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $labels->firstItem() + $index }}</td>
                                                     <td>{{ $label->lot_number }}</td>
                                                     <td>{{ $label->length }} m</td>
                                                     <td>{{ $label->weight }} kg</td>
