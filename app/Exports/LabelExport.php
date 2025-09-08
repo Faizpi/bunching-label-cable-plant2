@@ -54,7 +54,6 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             'No',
-            'ID',
             'Lot Number',
             'Formatted Lot Number',
             'Size',
@@ -79,7 +78,6 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping
 
         return [
             $this->rowNumber,
-            $row->id,
             "'" . $row->lot_number,
             "'" . $row->formated_lot_number,
             $row->size,

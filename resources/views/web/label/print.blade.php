@@ -40,7 +40,6 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>ID</th>
                 <th>Lot Number</th>
                 <th>Formatted Lot Number</th>
                 <th>Size</th>
@@ -62,7 +61,6 @@
             @forelse($labels as $label)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $label->id }}</td>
                     <td>{{ $label->lot_number }}</td>
                     <td>{{ $label->formated_lot_number }}</td>
                     <td>{{ $label->size }}</td>
@@ -81,7 +79,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="17">Tidak ada data</td>
+                    <td colspan="16">Tidak ada data</td>
                 </tr>
             @endforelse
         </tbody>
