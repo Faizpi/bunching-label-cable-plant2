@@ -31,14 +31,14 @@ Route::group(['prefix' => '/', 'namespace' => 'Web'], function () {
             Route::post('/{label}/update_only', 'IndexController@updateOnly')->name('web.label.update_only');
             Route::get('/{label}/delete', 'IndexController@delete')->name('web.label.delete');
 
-            Route::get('/export/excel', 'IndexController@exportExcel')->middleware('role:admin,operator')->name('web.label.export.excel');
+            Route::get('/export/excel', 'IndexController@exportExcel')->middleware('role:admin')->name('web.label.export.excel');
             Route::get('/export/pdf', 'IndexController@exportPDF')->middleware('role:admin,operator')->name('web.label.export.pdf');
-            Route::get('/print', 'IndexController@printView')->middleware('role:admin,operator')
+            Route::get('/print', 'IndexController@printView')->middleware('role:admin')
                 ->name('web.label.print');
 
             Route::get('/{label}/print', 'IndexController@printSingle')
-    ->middleware('role:admin,operator')
-    ->name('web.label.print.single');
+                ->middleware('role:admin,operator')
+                ->name('web.label.print.single');
 
         });
 

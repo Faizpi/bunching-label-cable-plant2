@@ -4,16 +4,16 @@
     <div class="row" style="padding:40px 30px;">
         <div class="col-sm-12">
             <div class="box" style="background:#ffffff;
-                        border-radius:10px;
-                        border:1px solid #e5e7eb;
-                        box-shadow:0 4px 12px rgba(0,0,0,0.1);
-                        overflow:hidden;">
+                            border-radius:10px;
+                            border:1px solid #e5e7eb;
+                            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+                            overflow:hidden;">
 
                 <!-- Header -->
                 <div class="box-header with-border" style="background:white;
-                            color:#fff;
-                            padding:1rem 1.5rem;
-                            border-bottom:1px solid #e5e7eb;">
+                                color:#fff;
+                                padding:1rem 1.5rem;
+                                border-bottom:1px solid #e5e7eb;">
                     <h2 class="box-title v-align-middle"
                         style="margin:0;font-weight:600;font-size:17px;letter-spacing:0.3px;color:black;">
                         Data Label
@@ -30,60 +30,57 @@
                                 <form class="form-inline" style="gap:0.5rem;">
                                     <input type="text" name="search" value="{{ request('search') ?? '' }}"
                                         placeholder="Masukan Lot No." class="form-control input-sm" style="border-radius:6px;
-                                                  padding:0.4rem 0.75rem;
-                                                  border:1px solid #cbd5e1;
-                                                  background:#f8fafc;
-                                                  color:#1e293b;">
+                                                      padding:0.4rem 0.75rem;
+                                                      border:1px solid #cbd5e1;
+                                                      background:#f8fafc;
+                                                      color:#1e293b;">
                                     <button type="submit" class="btn btn-primary btn-sm" style="background:#0284c7;
-                                                   border:none;
-                                                   border-radius:6px;
-                                                   padding:0.4rem 1rem;
-                                                   font-weight:500;
-                                                   box-shadow:0 2px 6px rgba(2,132,199,0.4);">
+                                                       border:none;
+                                                       border-radius:6px;
+                                                       padding:0.4rem 1rem;
+                                                       font-weight:500;
+                                                       box-shadow:0 2px 6px rgba(2,132,199,0.4);">
                                         Cari
                                     </button>
                                     <a href="{{ route('web.label.index') }}" class="btn btn-success btn-sm" style="background:#16a34a;
-                                              border:none;
-                                              border-radius:6px;
-                                              padding:0.4rem 1rem;
-                                              font-weight:500;
-                                              box-shadow:0 2px 6px rgba(22,163,74,0.4);">
+                                                  border:none;
+                                                  border-radius:6px;
+                                                  padding:0.4rem 1rem;
+                                                  font-weight:500;
+                                                  box-shadow:0 2px 6px rgba(22,163,74,0.4);">
                                         Reset
                                     </a>
                                 </form>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <form action="" method="GET" class="form-inline pull-right" style="gap:0.5rem;">
-                                    <label for="start_date" class="control-label" style="color:#475569;">Dari</label>
-                                    <input type="date" name="start_date" id="start_date" class="form-control input-sm"
-                                        style="border-radius:6px;
-                                               border:1px solid #cbd5e1;
-                                               background:#f8fafc;
-                                               color:#1e293b;">
-                                    <label for="end_date" class="control-label"
-                                        style="margin-left:10px;color:#475569;">Sampai</label>
-                                    <input type="date" name="end_date" id="end_date" class="form-control input-sm" style="border-radius:6px;
-                                               border:1px solid #cbd5e1;
-                                               background:#f8fafc;
-                                               color:#1e293b;">
-                                    <button formaction="{{ route('web.label.export.excel') }}"
-                                        class="btn btn-success btn-sm" style="background:#16a34a;
-                                                   border:none;
-                                                   border-radius:6px;
-                                                   padding:0.4rem 1rem;
-                                                   font-weight:500;
-                                                   box-shadow:0 2px 6px rgba(22,163,74,0.4);">
-                                        <i class="fa fa-file-excel-o"></i> Excel
-                                    </button>
-                                    <button formaction="{{ route('web.label.print') }}" formtarget="_blank"
-                                        class="btn btn-info btn-sm" style="background:#0ea5e9;
-                                                   border:none;
-                                                   border-radius:6px;
-                                                   padding:0.4rem 1rem;
-                                                   font-weight:500;
-                                                   box-shadow:0 2px 6px rgba(14,165,233,0.4);">
-                                        <i class="fa fa-print"></i> Print
-                                    </button>
+                            @if(auth()->user()->role === 'admin')
+                                            <div class="col-md-6 text-right">
+                                                <form action="" method="GET" class="form-inline pull-right" style="gap:0.5rem;">
+                                                    <label for="start_date" class="control-label" style="color:#475569;">Dari</label>
+                                                    <input type="date" name="start_date" id="start_date" class="form-control input-sm"
+                                                        style="border-radius:6px;
+                                                                   border:1px solid #cbd5e1;
+                                                                   background:#f8fafc;
+                                                                   color:#1e293b;">
+                                                    <label for="end_date" class="control-label"
+                                                        style="margin-left:10px;color:#475569;">Sampai</label>
+                                                    <input type="date" name="end_date" id="end_date" class="form-control input-sm" style="border-radius:6px;
+                                                                   border:1px solid #cbd5e1;
+                                                                   background:#f8fafc;
+                                                                   color:#1e293b;">
+                                                    <button formaction="{{ route('web.label.export.excel') }}"
+                                                        class="btn btn-success btn-sm" style="background:#16a34a;border:none;border-radius:6px;
+                                   padding:0.4rem 1rem;font-weight:500;
+                                   box-shadow:0 2px 6px rgba(22,163,74,0.4);">
+                                                        <i class="fa fa-file-excel-o"></i> Excel
+                                                    </button>
+
+                                                    <button formaction="{{ route('web.label.print') }}" formtarget="_blank"
+                                                        class="btn btn-info btn-sm" style="background:#0ea5e9;border:none;border-radius:6px;
+                                   padding:0.4rem 1rem;font-weight:500;
+                                   box-shadow:0 2px 6px rgba(14,165,233,0.4);">
+                                                        <i class="fa fa-print"></i> Print
+                                                    </button>
+                            @endif
                                 </form>
                             </div>
                         </div>
@@ -91,13 +88,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive" style="border-radius:8px;
-                                            overflow-x:auto; 
-                                            -webkit-overflow-scrolling: touch; 
-                                            margin-top:20px;">
+                                                overflow-x:auto; 
+                                                -webkit-overflow-scrolling: touch; 
+                                                margin-top:20px;">
                                     <table class="table table-striped table-bordered" style="margin:0;
-                                                background:#ffffff;
-                                                color:#1e293b;
-                                                min-width:1000px;">
+                                                    background:#ffffff;
+                                                    color:#1e293b;
+                                                    min-width:1000px;">
                                         <thead style="background:#0284c7;color:#fff;position:sticky;top:0;z-index:5;">
                                             <tr>
                                                 <th>No</th>
