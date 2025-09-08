@@ -1,0 +1,18 @@
+* text=auto
+
+# Jangan hitung asset / library
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
+*.html linguist-vendored
+*.less linguist-vendored
+vendor/* linguist-vendored
+node_modules/* linguist-vendored
+public/storage/* linguist-vendored
+public/assets/* linguist-vendored
+
+# Paksa Blade dihitung sebagai Blade, bukan PHP
+*.blade.php linguist-language=Blade
+
+# Exclude changelog dari export
+CHANGELOG.md export-ignore
