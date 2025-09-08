@@ -69,11 +69,11 @@ class IndexController extends Controller
             ->when($request->search, function ($q) use ($request) {
                 return $q->where('lot_number', 'like', "%{$request->search}%");
             })
+            ->orderBy('id', 'desc')
             ->paginate(10);
+            
         return view('web.label.index', compact('labels'));
     }
-
-
 
     public function edit($label)
     {
@@ -116,10 +116,10 @@ class IndexController extends Controller
     }
 
     public function printSingle($id)
-{
+    {
     $label = Label::with('operator')->findOrFail($id);
     return view('export.label', compact('label'));
-}
+    }
 
     public function updateOnly(Request $req, $label)
     {

@@ -52,7 +52,7 @@
                                     </a>
                                 </form>
                             </div>
-                            @if(auth()->user()->role === 'admin')
+                            @if(auth()->user()->role == 0)                            
                                             <div class="col-md-6 text-right">
                                                 <form action="" method="GET" class="form-inline pull-right" style="gap:0.5rem;">
                                                     <label for="start_date" class="control-label" style="color:#475569;">Dari</label>
@@ -106,6 +106,7 @@
                                                 <th>Mesin No</th>
                                                 <th>Pitch</th>
                                                 <th>Direction</th>
+                                                <th>Visual</th>
                                                 <th>Operator</th>
                                                 <th>Action</th>
                                             </tr>
@@ -115,13 +116,14 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $label->lot_number }}</td>
-                                                    <td>{{ $label->length }} M</td>
-                                                    <td>{{ $label->weight }} KG</td>
+                                                    <td>{{ $label->length }} m</td>
+                                                    <td>{{ $label->weight }} kg</td>
                                                     <td>{{ $label->shift_date }}</td>
                                                     <td>{{ $label->shift }}</td>
                                                     <td>{{ $label->machine_number }}</td>
-                                                    <td>{{ $label->pitch }}</td>
+                                                    <td>{{ $label->pitch }} mm</td>
                                                     <td>{{ $label->direction }}</td>
+                                                    <td>{{ $label->visual }}</td>
                                                     <td>{{ $label->operator->name }}</td>
                                                     <td class="text-center" style="white-space: nowrap;">
                                                         <a href="{{ route('web.label.print.single', $label->id) }}"
