@@ -115,6 +115,11 @@ class IndexController extends Controller
         return view('export.label', ['label' => $label]);
     }
 
+    public function printSingle($id)
+{
+    $label = Label::with('operator')->findOrFail($id);
+    return view('export.label', compact('label'));
+}
 
     public function updateOnly(Request $req, $label)
     {
@@ -241,3 +246,4 @@ class IndexController extends Controller
         return $number;
     }
 }
+
