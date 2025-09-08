@@ -263,19 +263,21 @@
                 $("#label_pitch").removeClass("has-error");
             }
 
-            if ($("input#remark").val() == "" || $("input#remark").val() == null) {
-                $("#label_remark").addClass("has-error");
-                fail = true;
-            } else {
-                $("#label_remark").removeClass("has-error");
-            }
+            // Hapus validasi remark
+            // if ($("input#remark").val() == "" || $("input#remark").val() == null) {
+            //     $("#label_remark").addClass("has-error");
+            //     fail = true;
+            // } else {
+            //     $("#label_remark").removeClass("has-error");
+            // }
 
-            if ($("input#bobin_no").val() == "" || $("input#bobin_no").val() == null) {
-                $("#label_bobin_no").addClass("has-error");
-                fail = true;
-            } else {
-                $("#label_bobin_no").removeClass("has-error");
-            }
+            // Hapus validasi bobin_no
+            // if ($("input#bobin_no").val() == "" || $("input#bobin_no").val() == null) {
+            //     $("#label_bobin_no").addClass("has-error");
+            //     fail = true;
+            // } else {
+            //     $("#label_bobin_no").removeClass("has-error");
+            // }
 
             if (!fail) {
                 $(this).unbind("submit");
