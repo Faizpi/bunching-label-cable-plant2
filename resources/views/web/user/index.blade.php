@@ -136,7 +136,7 @@
                                 <tr style="transition:all .2s ease;"
                                     onmouseover="this.style.backgroundColor='rgba(2,132,199,0.05)'"
                                     onmouseout="this.style.backgroundColor=''">
-                                    <td>{{($i+1)}}</td>
+                                    <td>{{$users->firstItem() + $i}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->nsk}}</td>
                                     <td>{{date('d F Y', strtotime($user->created_at))}}</td>
