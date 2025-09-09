@@ -7,17 +7,23 @@
     <style>
         body {
             font-size: 12px;
-            margin: 20px;
+            margin: 15px;
         }
 
-        h4 {
-            margin-bottom: 20px;
+        h1 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .sub-title {
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         th,
@@ -26,29 +32,61 @@
             padding: 5px;
             text-align: center;
         }
+
+        thead th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            border: 1.5px solid #000;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
+        /* Landscape */
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 11px;
+            text-align: right;
+        }
     </style>
 </head>
 
 <body onload="window.print()">
 
-    <h1 class="text-center">Laporan Data Label</h1>
-    @if($start && $end)
-        <p class="text-center">Periode: {{ $start }} s/d {{ $end }}</p>
-    @endif
+    {{-- Header --}}
+    <div class="text-center">
+        <h1>LAPORAN DATA LABEL</h1>
+        <div class="sub-title">
+            @if($start && $end)
+                Periode: {{ \Carbon\Carbon::parse($start)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($end)->format('d-m-Y') }}
+            @else
+                Semua Periode
+            @endif
+        </div>
+        <hr>
+    </div>
 
+    {{-- Tabel data --}}
     <table>
         <thead>
             <tr>
                 <th>No</th>
+                <th>ID</th>
                 <th>Lot Number</th>
                 <th>Formatted Lot Number</th>
                 <th>Size</th>
-                <th>Length</th>
-                <th>Weight</th>
+                <th>Length (m)</th>
+                <th>Weight (kg)</th>
                 <th>Shift Date</th>
                 <th>Shift</th>
                 <th>Machine Number</th>
-                <th>Pitch</th>
+                <th>Pitch (mm)</th>
                 <th>Direction</th>
                 <th>Visual</th>
                 <th>Remark</th>
@@ -61,21 +99,24 @@
             @forelse($labels as $label)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $label->id }}</td>
                     <td>{{ $label->lot_number }}</td>
                     <td>{{ $label->formated_lot_number }}</td>
                     <td>{{ $label->size }}</td>
-                    <td>{{ $label->length }} m</td>
-                    <td>{{ $label->weight }} kg</td>
-                    <td>{{ $label->shift_date }}</td>
+                    <td>{{ $label->length }}</td>
+                    <td>{{ $label->weight }}</td>
+                    <!-- <td>{{ $label->shift_date }}</td> -->
+                    <td>{{ \Carbon\Carbon::parse($label->shift_date)->format('d-m-Y') }}</td>
                     <td>{{ $label->shift }}</td>
                     <td>{{ $label->machine_number }}</td>
-                    <td>{{ $label->pitch }} mm</td>
+                    <td>{{ $label->pitch }}</td>
                     <td>{{ $label->direction }}</td>
                     <td>{{ $label->visual }}</td>
                     <td>{{ $label->remark }}</td>
                     <td>{{ $label->bobin_no }}</td>
                     <td>{{ $label->operator->name ?? '-' }}</td>
-                    <td>{{ $label->created_at }}</td>
+                    <!-- <td>{{ $label->created_at }}</td> -->
+                    <td>{{ \Carbon\Carbon::parse($label->created_at)->format('d-m-Y H:i') }}</td>
                 </tr>
             @empty
                 <tr>
@@ -84,6 +125,13 @@
             @endforelse
         </tbody>
     </table>
+
+    {{-- Footer --}}
+    <div class="footer">
+        Dicetak pada: {{ now()->format('d-m-Y H:i') }} <br>
+        Oleh: {{ auth()->user()->name ?? 'System' }}
+    </div>
+
 </body>
 
 </html>
