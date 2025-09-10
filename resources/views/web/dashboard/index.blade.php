@@ -250,7 +250,7 @@
                 $("#label_machine_no").removeClass("has-error");
             }
 
-            // // Remark
+            // // Remark ini
             // if ($("input#remark").val() == "" || $("input#remark").val() == null) {
             //     $("#label_remark").addClass("has-error");
             //     fail = true;
