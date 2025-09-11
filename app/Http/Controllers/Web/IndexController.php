@@ -158,7 +158,7 @@ class IndexController extends Controller
             $label->delete();
         }
 
-        return redirect()->route('web.dashboard.index');
+        return redirect()->route('web.label.index');
     }
 
     public function exportExcel(Request $request)
