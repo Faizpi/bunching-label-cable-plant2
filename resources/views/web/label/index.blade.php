@@ -99,6 +99,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Lot No.</th>
+                                                <th>size</th>
                                                 <th>Length</th>
                                                 <th>Weight</th>
                                                 <th>Date</th>
@@ -116,6 +117,7 @@
                                                 <tr>
                                                     <td>{{ $labels->firstItem() + $index }}</td>
                                                     <td>{{ $label->lot_number }}</td>
+                                                    <td>{{ $label->size }}</td>
                                                     <td>{{ $label->length }} m</td>
                                                     <td>{{ $label->weight }} kg</td>
                                                     <td>{{ $label->shift_date }}</td>
