@@ -64,7 +64,7 @@
     .login-logo span {
       font-size: 22px;
       font-weight: 700;
-      color: #1e3a8a;
+      color: #0001ee;
       display: block;
     }
 
