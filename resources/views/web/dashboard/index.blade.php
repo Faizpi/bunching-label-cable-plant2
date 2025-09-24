@@ -45,7 +45,8 @@
                         <div id="label_machine_no" class="form-group">
                             <label for="machine_no">Machine No</label>
                             <select name="machine_number" id="machine_no" class="form-control" required>
-                                <option value="221" selected>221</option>
+                                <option value="">-- Pilih Mesin --</option>
+                                <option value="221">221</option>
                                 <option value="222">222</option>
                                 <option value="223">223</option>
                                 <option value="224">224</option>
