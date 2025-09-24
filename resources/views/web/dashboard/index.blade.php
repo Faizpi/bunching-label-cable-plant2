@@ -132,8 +132,8 @@
                         border:none !important;
                         color:#fff !important;
                         font-weight:600;
-                        border-radius:8px;
-                        ">
+                        border-radius:8px;"
+                        onclick="setTimeout(()=>location.reload(), 1000)">
                         Print
                     </button>
                 </div>
