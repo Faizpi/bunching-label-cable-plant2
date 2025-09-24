@@ -117,10 +117,10 @@
                             <label for="remark">Remark</label>
                             <input type="text" name="remark" class="form-control" id="remark" placeholder="Remark">
                         </div>
-                        <div id="label_bobin_no" class="form-group">
+                        <!-- <div id="label_bobin_no" class="form-group">
                             <label for="bobin_no">No Bobin</label>
                             <input type="text" name="bobin_no" value="" class="form-control" id="bobin_no" placeholder="No Bobin">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
