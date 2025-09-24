@@ -26,8 +26,13 @@
                             <select id="date" name="shift_date" class="form-control" required></select>
                         </div>
                         <div id="label_lot_not" class="form-group">
-                            <label for="lot_not">Lot No</label>
-                            <input type="number" name="lot_not" value="" class="form-control" id="lot_not" placeholder="Lot No (ex: 001)" required>
+                            <label for="lot_not">Lot No (Auto)</label>
+                            <input type="text" name="lot_not" id="lot_not"
+                                class="form-control" placeholder="Pilih mesin & tanggal dulu"
+                                readonly>
+                            <small style="color:#777;">
+                                *(Lot Number akan terisi otomatis setelah memilih mesin & tanggal)
+                            </small>
                         </div>
                         <div id="label_shift" class="form-group">
                             <label for="shift">Shift</label>
@@ -275,7 +280,20 @@
         });
     }
 
+    $('#machine_no, #date').change(function() {
+    let machine = $('#machine_no').val();
+    let date = $('#date').val();
 
+    if(machine && date) {
+        $.get('{{ route("web.dashboard.getNextLot") }}', {machine: machine, date: date}, function(res) {
+            if(res.next_lot) {
+                $('#lot_not').val(res.next_lot);
+            } else {
+                $('#lot_not').val('');
+            }
+        });
+    }
+    });
 
     var now = new Date();
     var now_month = now.getMonth();

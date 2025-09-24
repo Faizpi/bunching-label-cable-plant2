@@ -33,11 +33,27 @@ class IndexController extends Controller
         return view('web.dashboard.index', compact("labels"));
     }
 
+    /** 🔹 Ambil next lot (AJAX hint) */
+    public function getNextLot(Request $req)
+    {
+        $machine = $req->machine;
+        $date = $req->date;
+
+        if (!$machine || !$date) {
+            return response()->json(['next_lot' => null]);
+        }
+
+        $next = $this->getIncrement($machine, $date);
+        $pharse = str_pad($next, 3, '0', STR_PAD_LEFT);
+
+        return response()->json(['next_lot' => $pharse]);
+    }
+
     /** 🔹 PRINT SATU LABEL */
     public function print(Request $req)
     {
-        $last_number = $this->getIncrement($req->machine_number);
-        $pharse = $req->lot_not;
+        $last_number = $this->getIncrement($req->machine_number, $req->shift_date);
+        $pharse = $this->pharseLastNumber($last_number);
 
         $user = auth()->user();
 
@@ -57,8 +73,6 @@ class IndexController extends Controller
         $label->bobin_no = $req->bobin_no;
         $label->operator_id = $user->id;
         $label->save();
-
-        $this->updateIncrement($last_number, $req->machine_number);
 
         return view('export.label', ['label' => $label]);
     }
@@ -213,36 +227,24 @@ class IndexController extends Controller
 
 
     /** Helpers */
-    private function getIncrement($machine_number)
+    private function getIncrement($machine_number, $shift_date)
     {
-        $increment = Increment::where("machine_number", $machine_number)->first();
-        if (!$increment) {
+        $lastLabel = Label::where('machine_number', $machine_number)
+            ->whereDate('shift_date', $shift_date)
+            ->orderBy('lot_number', 'desc')
+            ->first();
+
+        if (!$lastLabel) {
             return 1;
         }
 
-        return $increment->last_number >= 4 ? 1 : $increment->last_number + 1;
-    }
-
-    private function updateIncrement($last, $machine_number)
-    {
-        $increment = Increment::where("machine_number", $machine_number)->first();
-        if (!$increment) {
-            $increment = new Increment;
-        }
-
-        $increment->last_number = $last;
-        $increment->machine_number = $machine_number;
-        $increment->save();
+        $lastNumber = intval(substr($lastLabel->lot_number, -3));
+        return $lastNumber + 1;
     }
 
     private function pharseLastNumber($number)
     {
-        if ($number < 10) {
-            return '00' . $number;
-        } elseif ($number < 100) {
-            return '0' . $number;
-        }
-        return $number;
+        return str_pad($number, 3, '0', STR_PAD_LEFT);
     }
 }
 
