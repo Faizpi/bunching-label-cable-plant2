@@ -25,15 +25,6 @@
                             <label for="date">Date</label>
                             <select id="date" name="shift_date" class="form-control" required></select>
                         </div>
-                        <div id="label_lot_not" class="form-group">
-                            <label for="lot_not">Lot No (Auto)</label>
-                            <input type="text" name="lot_not" id="lot_not"
-                                class="form-control" placeholder="Pilih mesin & tanggal dulu"
-                                readonly>
-                            <small style="color:#777;">
-                                *(Lot Number akan terisi otomatis setelah memilih mesin & tanggal)
-                            </small>
-                        </div>
                         <div id="label_shift" class="form-group">
                             <label for="shift">Shift</label>
                             <select name="shift" id="shift" class="form-control" required>
@@ -68,6 +59,15 @@
             <div class="col-sm-4">
                 <div class="panel panel-default" style="background: rgba(255, 255, 255, 0.15); border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px rgba(31,38,135,0.37); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
                     <div class="panel-body">
+                        <div id="label_lot_not" class="form-group">
+                            <label for="lot_not">Lot No (Auto)</label>
+                            <input type="text" name="lot_not" id="lot_not"
+                                class="form-control" placeholder="Pilih mesin & tanggal dulu"
+                                readonly>
+                            <small style="color:#777;">
+                                *(Lot Number akan terisi otomatis setelah memilih mesin & tanggal)
+                            </small>
+                        </div>
                         <div id="label_pitch" class="form-group">
                             <label for="pitch">Pitch</label>
                             <div class="radio">
