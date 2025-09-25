@@ -83,16 +83,14 @@
                 <th>Size</th>
                 <th>Length (m)</th>
                 <th>Weight (kg)</th>
-                <th>Shift Date</th>
+                <th>Date</th>
                 <th>Shift</th>
                 <th>Machine Number</th>
                 <th>Pitch (mm)</th>
                 <th>Direction</th>
                 <th>Visual</th>
                 <th>Remark</th>
-                <th>Bobin No</th>
                 <th>Operator Name</th>
-                <th>Created At</th>
             </tr>
         </thead>
         <tbody>
@@ -106,21 +104,19 @@
                     <td>{{ $label->length }}</td>
                     <td>{{ $label->weight }}</td>
                     <!-- <td>{{ $label->shift_date }}</td> -->
-                    <td>{{ \Carbon\Carbon::parse($label->shift_date)->format('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($label->shift_date)->format('d-M-Y') }}</td>
                     <td>{{ $label->shift }}</td>
                     <td>{{ $label->machine_number }}</td>
                     <td>{{ $label->pitch }}</td>
                     <td>{{ $label->direction }}</td>
                     <td>{{ $label->visual }}</td>
                     <td>{{ $label->remark }}</td>
-                    <td>{{ $label->bobin_no }}</td>
                     <td>{{ $label->operator->name ?? '-' }}</td>
                     <!-- <td>{{ $label->created_at }}</td> -->
-                    <td>{{ \Carbon\Carbon::parse($label->created_at)->format('d-m-Y H:i') }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="16">Tidak ada data</td>
+                    <td colspan="15">Tidak ada data</td>
                 </tr>
             @endforelse
         </tbody>
