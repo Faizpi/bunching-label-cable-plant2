@@ -72,6 +72,7 @@ class IndexController extends Controller
         $label->remark = $req->remark;
         $label->bobin_no = $req->bobin_no;
         $label->operator_id = $user->id;
+        $label->print_count = 1;
         $label->save();
 
         return view('export.label', ['label' => $label]);
@@ -126,12 +127,15 @@ class IndexController extends Controller
         $label->operator_id = $user->id;
         $label->save();
 
+        $label->increment('print_count');
+
         return view('export.label', ['label' => $label]);
     }
 
     public function printSingle($id)
     {
     $label = Label::with('operator')->findOrFail($id);
+    $label->increment('print_count');
     return view('export.label', compact('label'));
     }
 
