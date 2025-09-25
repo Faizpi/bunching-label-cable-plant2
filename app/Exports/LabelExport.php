@@ -13,8 +13,10 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class LabelExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithColumnFormatting, WithStyles
+class LabelExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithColumnFormatting, WithStyles
 {
     protected $startDate;
     protected $endDate;
@@ -26,9 +28,10 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
         $this->endDate   = $endDate;
     }
 
-    public function collection()
+    public function query()
     {
-        $query = Label::select(
+        $query = Label::query()
+        ->select(
             'labels.id',
             'labels.lot_number',
             'labels.formated_lot_number',
@@ -53,7 +56,7 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
             $query->whereBetween('labels.shift_date', [$this->startDate, $this->endDate]);
         }
 
-        return $query->get();
+        return $query;
     }
 
     public function headings(): array
@@ -63,19 +66,17 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
             'ID',
             'Lot Number',
             'Formatted Lot Number',
-            'Size',
+            'Type/Size',
             'Length (m)',
             'Weight (kg)',
-            'Shift Date',
+            'Date',
             'Shift',
             'Machine Number',
             'Pitch (mm)',
             'Direction',
             'Visual',
             'Remark',
-            'Bobin No',
             'Operator Name',
-            'Created At'
         ];
     }
 
@@ -92,25 +93,27 @@ class LabelExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
             $row->length,
             $row->weight,
             // $row->shift_date,
-            Carbon::parse($row->shift_date)->format('d-m-Y'),
+            Date::PHPToExcel(Carbon::parse($row->shift_date)),
             $row->shift,
             $row->machine_number,
             $row->pitch,
             $row->direction,
             $row->visual,
             $row->remark,
-            $row->bobin_no,
             $row->operator_name,
             // $row->created_at,
-            Carbon::parse($row->created_at)->format('d-m-Y H:i'),
         ];
     }
 
     public function columnFormats(): array
     {
         return [
-            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY,      // Shift Date
-            'Q' => NumberFormat::FORMAT_DATE_DATETIME,      // Created At
+            'C' => NumberFormat::FORMAT_TEXT,               // Lot Number
+            'D' => NumberFormat::FORMAT_TEXT,               // Formatted Lot Number
+            'F' => NumberFormat::FORMAT_NUMBER_00,         // Length (m)
+            'G' => NumberFormat::FORMAT_NUMBER_00,         // Weight (kg)
+            'H' => NumberFormat::FORMAT_DATE_DDMMYYYY,      // Date
+            'K' => NumberFormat::FORMAT_NUMBER_00,         // Pitch (mm)
         ];
     }
 
